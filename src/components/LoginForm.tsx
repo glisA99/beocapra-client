@@ -1,26 +1,30 @@
 import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { login, UserData } from '../api/login';
 
 export const USER_DATA = "USER_DATA";
 
 export const LoginForm = () => {
 
-    const [username,setUsername] = React.useState<string>("");
-    const [password,setPassword] = React.useState<string>("");
-    const [checked,setChecked] = React.useState<boolean>(true);
-    const [error,setError] = React.useState<string | undefined>(undefined);
+    const [username,setUsername] = useState<string>("");
+    const [password,setPassword] = useState<string>("");
+    const [checked,setChecked] = useState<boolean>(true);
+    const [error,setError] = useState<string | undefined>(undefined);
 
-    const onUsernameChange = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const onUsernameChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         if (value.length < 15) setUsername(value);
     },[]);
 
-    const onPasswordChange = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const onPasswordChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         if (value.length < 20) setPassword(value);
-    },[])
+    },[]);
+
+    const onCheckedChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+        setChecked(prev => !prev);
+    },[]);
 
     const onLogin = async () => {
         const data:UserData | false = await login(username,password);
@@ -58,7 +62,7 @@ export const LoginForm = () => {
             /><br></br>
             <FormControlLabel 
                 label="Remember me"
-                control={<Checkbox checked={checked} />}
+                control={<Checkbox checked={checked} onChange={onCheckedChange} />}
                 defaultChecked
             /><br></br>
             <Button 

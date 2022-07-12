@@ -19,7 +19,7 @@ export const LoginRouteProxy = ({ children }: LoginRouteProps) => {
         if (appContext.user) {
             console.log("[LOGIN_PROXY]: User is already logged in");
             console.log(`[LOGIN_PROXY]: Navigating to index route`);
-            setTimeout(() => navigate("/"),2000);
+            setTimeout(() => navigate("/"), 2000);
         } else {
             var user_data = localStorage.getItem(USER_DATA);
             if (!user_data) user_data = sessionStorage.getItem(USER_DATA);
