@@ -1,5 +1,6 @@
 import React from 'react';
 import { Radnik } from './types/Radnik';
+import { WithChildren } from './types/util';
 
 type ApplicationContext = {
     user?: Radnik
@@ -8,8 +9,7 @@ type ApplicationContext = {
 const AppContext = React.createContext<ApplicationContext>({});
 AppContext.displayName = "APPLICATION_CONTEXT";
 
-type WithAppContextProps = {
-    children: React.ReactNode,
+type WithAppContextProps = WithChildren & {
     initValue?: ApplicationContext
 }
 
