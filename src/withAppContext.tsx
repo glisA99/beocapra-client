@@ -1,4 +1,4 @@
-import React, { useState,useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { User } from './types/User';
 import { WithChildren } from './types/utils';
 
@@ -24,15 +24,13 @@ type WithAppContextProps = WithChildren & {
     initValue?: { context: ApplicationContext }
 }
 
-export const withAppContext = ({ children,initValue }: WithAppContextProps) => {
+export const withAppContext = ({ children,initValue = { context: {} } }: WithAppContextProps) => {
     
-    const [state,setState] = useState<{ context: ApplicationContext }>(initValue || {
-        context: {}
-    });
+    const [state,setState] = useState<{ context: ApplicationContext }>(initValue);
     const [dispatchState,setDispatchState] = useState<{ context: ApplicationDispatchContext }>({} as any);
 
     // on mount -> set functions that mutate state
-    React.useEffect(() => {
+    useEffect(() => {
         setDispatchState({
             context: { loginUser, logoutUser }
         });
