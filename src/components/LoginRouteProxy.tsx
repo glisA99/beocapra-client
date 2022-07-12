@@ -24,6 +24,7 @@ export const LoginRouteProxy = ({ children }: LoginRouteProps) => {
             const data: UserData = JSON.parse(user_data);
             appDispatch.loginUser({ username: data.username });
             navigate("/");
+            return null;
         }
     }
 
