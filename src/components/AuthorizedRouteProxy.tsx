@@ -44,3 +44,4 @@ export const AuthorizedRouteProxy = ({ children, path }: AuthorizedRouteProps) =
         </React.Fragment>
     )
 }
+
