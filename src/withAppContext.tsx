@@ -1,6 +1,6 @@
 import React from 'react';
 import { Radnik } from './types/Radnik';
-import { WithChildren } from './types/util';
+import { WithChildren } from './types/utils';
 
 type ApplicationContext = {
     user?: Radnik
