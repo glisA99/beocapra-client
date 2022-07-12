@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { User } from './types/User';
-import { WithChildren } from './types/utils';
+import { User } from '../types/User';
+import { WithChildren } from '../types/utils';
 
 type LoginUserFn = (user: User) => void
 type LogoutFn = () => void
@@ -14,17 +14,17 @@ type ApplicationDispatchContext = {
 }
 
 // to query the context state
-const AppContext = React.createContext<ApplicationContext>({});
+export const AppContext = React.createContext<ApplicationContext>({});
 AppContext.displayName = "APPLICATION_CONTEXT";
 // to mutate the context state
-const AppContextDispatch = React.createContext<ApplicationDispatchContext>({} as any);
+export const AppContextDispatch = React.createContext<ApplicationDispatchContext>({} as any);
 AppContextDispatch.displayName = "APPLICATION_DISPATCH_CONTEXT";
 
 type WithAppContextProps = WithChildren & {
     initValue?: { context: ApplicationContext }
 }
 
-export const withAppContext = ({ children,initValue = { context: {} } }: WithAppContextProps) => {
+export const WithAppContext = ({ children,initValue = { context: {} } }: WithAppContextProps) => {
     
     const [state,setState] = useState<{ context: ApplicationContext }>(initValue);
     const [dispatchState,setDispatchState] = useState<{ context: ApplicationDispatchContext }>({} as any);

@@ -1,7 +1,9 @@
 import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import React from 'react';
-import { login, Tokens } from '../api/login';
+import { login, UserData } from '../api/login';
+
+export const USER_DATA = "USER_DATA";
 
 export const LoginForm = () => {
 
@@ -21,14 +23,12 @@ export const LoginForm = () => {
     },[])
 
     const onLogin = async () => {
-        const tokens:Tokens | false = await login(username,password);
-        if (tokens === false) {
+        const data:UserData | false = await login(username,password);
+        if (data === false) {
             setError("Invalid username or password");
             return;
         }
-        const access_token = tokens.access_token;
-        if (checked) localStorage.setItem('access_token',access_token);
-        else sessionStorage.setItem('access_token',access_token);
+        saveDataToStorage(checked,data);
     }
   
     return (
@@ -75,4 +75,9 @@ export const LoginForm = () => {
         </div>
     )
 
+}
+
+function saveDataToStorage(checked: boolean, data: UserData) {
+    if (checked) localStorage.setItem(USER_DATA,JSON.stringify(data))
+    else sessionStorage.setItem(USER_DATA,JSON.stringify(data))
 }
