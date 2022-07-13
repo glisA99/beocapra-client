@@ -29,13 +29,6 @@ export const WithAppContext = ({ children,initValue = { context: {} } }: WithApp
     const [state,setState] = useState<{ context: ApplicationContext }>(initValue);
     const [dispatchState,setDispatchState] = useState<{ context: ApplicationDispatchContext }>({} as any);
 
-    // on mount -> set functions that mutate state
-    useEffect(() => {
-        setDispatchState({
-            context: { loginUser, logoutUser }
-        });
-    }, []);
-
     const loginUser = useCallback<LoginUserFn>(user => {
         if (state.context.user) return;
         setState(prevState => ({ context: { ...prevState.context, user } }));
@@ -45,6 +38,12 @@ export const WithAppContext = ({ children,initValue = { context: {} } }: WithApp
         if (!state.context.user) return;
         setState(prevState => ({ context: { ...prevState.context, user: undefined } }));
     }, []);
+
+    if (!dispatchState.context) {
+        setDispatchState({
+            context: { loginUser, logoutUser }
+        });
+    }
 
     return (
         <AppContext.Provider value={state.context}>

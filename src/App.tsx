@@ -13,6 +13,7 @@ function App() {
       <Routes>
         <Route path='/' element={
           <AuthorizedRouteProxy path='/login'>
+            <Navbar />
             <>INDEX</>
           </AuthorizedRouteProxy>
         }/>

@@ -2,6 +2,7 @@ import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import React, { useCallback, useState } from 'react';
 import { login, UserData } from '../api/login';
+import { useNavigate } from 'react-router-dom';
 
 export const USER_DATA = "USER_DATA";
 
@@ -11,6 +12,8 @@ export const LoginForm = () => {
     const [password,setPassword] = useState<string>("");
     const [checked,setChecked] = useState<boolean>(true);
     const [error,setError] = useState<string | undefined>(undefined);
+
+    const navigate = useNavigate();
 
     const onUsernameChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
@@ -27,12 +30,17 @@ export const LoginForm = () => {
     },[]);
 
     const onLogin = async () => {
-        const data:UserData | false = await login(username,password);
-        if (data === false) {
+        try {
+            var data = await login(username,password);
+            if (data === false) {
+                setError("Invalid username or password");
+                return;
+            }
+            saveDataToStorage(checked,data);
+            navigate("/");
+        } catch (ex) {
             setError("Invalid username or password");
-            return;
         }
-        saveDataToStorage(checked,data);
     }
   
     return (
