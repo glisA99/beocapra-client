@@ -1,11 +1,5 @@
-import axios, { AxiosResponse } from 'axios';
-
-const PORT = 8080;
-const BASE_URL = `http://localhost:${PORT}`;
-const axios_instance = axios.create({
-    baseURL: BASE_URL,
-    timeout: 2500
-})
+import { AxiosResponse } from 'axios';
+import { axios_instance } from './axios_instance_config';
 
 export type Tokens = {
     access_token: string,
