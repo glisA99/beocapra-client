@@ -73,7 +73,10 @@ export const Navbar = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                             >
-                                <MenuItem key={"View all products"} onClick={handleCloseUserMenu}>
+                                <MenuItem key={"View all products"} onClick={() => {
+                                    handleCloseUserMenu();
+                                    navigate('/products');
+                                }}>
                                     <ViewListIcon/>
                                     <Typography 
                                         textAlign="center"

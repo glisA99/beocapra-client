@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { User } from '../types/User';
+import { User } from '../types/model';
 import { WithChildren } from '../types/utils';
 
 type LoginUserFn = (user: User) => void

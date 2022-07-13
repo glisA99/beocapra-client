@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import { AuthorizedRouteProxy } from './components/AuthorizedRouteProxy';
 import { LoginRouteProxy } from './components/LoginRouteProxy';
 import { Navbar } from './components/Navbar';
+import { ProductsPage } from './components/ProductsPage';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/products" element={
           <React.Fragment>
             <Navbar />
+            <ProductsPage />
           </React.Fragment> 
         }/>
       </Routes>

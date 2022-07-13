@@ -5,7 +5,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: #61dafb; */
+  background-color: rgba(243, 237, 237, 0.269);
+  overflow-y: hidden;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
@@ -58,7 +59,38 @@
 .products-page {
   width: 100%;
   height: 100%;
+  margin-top: 5%;
   box-sizing: border-box;
-  padding: 10%;
+  padding: 5%;
+  display: flex;
+  flex-direction: row;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color:rgb(63, 62, 62)
+}
+
+.products-table-container {
+  width: 75%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 1%;
   border: 1px solid black;
+}
+
+.products-settings {
+  width: 25%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 5%;
+  border: 1px solid black;
+}
+
+.wrapper-div {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgb(217, 216, 216);
+  border-radius: 5px;
+  background-color: white;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
 }
