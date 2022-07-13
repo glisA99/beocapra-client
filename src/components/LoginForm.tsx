@@ -22,7 +22,7 @@ export const LoginForm = () => {
         if (value.length < 20) setPassword(value);
     },[]);
 
-    const onCheckedChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const onCheckedChange = useCallback(() => {
         setChecked(prev => !prev);
     },[]);
 
