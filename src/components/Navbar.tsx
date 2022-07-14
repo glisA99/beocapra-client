@@ -85,7 +85,7 @@ export const Navbar = () => {
                                         View all products
                                     </Typography>
                                 </MenuItem>
-                                <MenuItem key={"View all products"} onClick={handleCloseUserMenu}>
+                                <MenuItem key={"Search products"} onClick={handleCloseUserMenu}>
                                     <ManageSearchIcon />
                                     <Typography 
                                         textAlign="center"
@@ -94,7 +94,7 @@ export const Navbar = () => {
                                         Search products
                                     </Typography>
                                 </MenuItem>
-                                <MenuItem key={"View all products"} onClick={handleCloseUserMenu}>
+                                <MenuItem key={"Add new product"} onClick={handleCloseUserMenu}>
                                     <AddBoxIcon />
                                     <Typography 
                                         textAlign="center"
