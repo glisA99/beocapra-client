@@ -34,3 +34,33 @@ export type Proizvod = {
     hemijskeOsobine: Array<any>,
     fizickeOsobine: Array<any>
 }
+
+export type TovarniList = {
+    tovarniListId: number,
+    napomena: number,
+    datumSlanja: Date
+}
+
+export type Dobavljac = {
+    dobavljacId: number,
+    email: string,
+    maticniBroj: string,
+    nazivDobavljaca: string,
+    pib: string,
+    ziroRacun: string,
+    website: string
+}
+
+export type StavkaPrijemnicaDobavljaca = {
+    prijemnicaDobavljacaId: number,
+    stavkaPrijemniceDobavljacaId: number,
+    kolicina: number,
+    vrednost: number,
+    proizvodId: number
+}
+
+export type PrijemnicaDobavljaca = {
+    prijemnicaDobavljacaId: number,
+    datumPrijema: string,
+    napomena: string,
+}
