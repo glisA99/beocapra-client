@@ -1,10 +1,18 @@
-import { Backdrop, Button, CircularProgress, TextField } from '@mui/material';
+import { Backdrop, Box, Button, CircularProgress, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { fetchProducts } from '../api/products-api';
+import { fetchProducts, ProductSortField } from '../api/products-api';
 import { Proizvod } from '../types/model';
 import { Page } from '../types/page';
 import { PaginationFooter } from './PaginationFooter';
 import ProductsList from './ProductList';
+
+const SortMap:Map<string,ProductSortField> = new Map([
+    ["ID","proizvodId"],
+    ["Datum proizvodnje","datumProizvodnje"],
+    ["Cena","cena"],
+    ["Naziv","nazivProizvoda"],
+    ["Stanje na zalihama","trenutnoStanjeZaliha"]
+])
 
 type State = Page<Proizvod>;
 
@@ -14,16 +22,20 @@ export const ProductsPage = () => {
     const [state,setState] = useState<State | null>(null);
     const [loading,setLoading] = useState<boolean>(true);
     const [perPage,setPerPage] = useState<number>(30);
+    const [sortBy,setSortBy] = useState<string>("ID");
+    const [mockSort,setMockSort] = useState<string>("ID");
 
     React.useEffect(() => {
-        fetch(page, perPage);
-    }, [page,perPage])
+        if (sortBy == "ID") fetch(page, perPage);
+        else fetch(page,perPage,SortMap.get(sortBy));
+    }, [page,perPage,sortBy])
 
-    async function fetch(pageNumber: number, perPage = 30) {
+    async function fetch(pageNumber: number, perPage = 30, sortBy?: ProductSortField) {
         setLoading(true);
         const page:State | false = await fetchProducts({
             page: pageNumber,
-            per_page: perPage
+            per_page: perPage,
+            sortBy
         }); 
         if (page === false) {
             console.log("Error ocurred during fetching. Please refresh the page")
@@ -48,6 +60,7 @@ export const ProductsPage = () => {
             if (count > 10 && count <= 50) {
                 setPerPage(count);
             }
+            if (mockSort != "ID") setSortBy(mockSort);
         } catch (ex) {}
     }
 
@@ -83,6 +96,24 @@ export const ProductsPage = () => {
                         inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} 
                         style={{textAlign: "center"}}
                     /><br></br><br></br>
+                    <Box sx={{ minWidth: 120 }}>
+                        <FormControl fullWidth>
+                            <InputLabel id="sortBy-select-label">Sort by</InputLabel>
+                            <Select
+                                labelId="sortBy-select-label"
+                                id="sortBy-select"
+                                label="SORT"
+                                value={mockSort}
+                                onChange={(event) => setMockSort(event.target.value as string)}
+                            >
+                                <MenuItem value={"ID"}>ID</MenuItem>
+                                <MenuItem value={"Datum proizvodnje"}>Datum proizvodnje</MenuItem>
+                                <MenuItem value={"Cena"}>Cena</MenuItem>
+                                <MenuItem value={"Naziv"}>Naziv</MenuItem>
+                                <MenuItem value={"Stanje na zalihama"}>Stanje na zalihama</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Box><br></br>
                     <Button 
                         variant="contained"
                         onClick={onApplyClick}
