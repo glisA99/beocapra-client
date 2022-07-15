@@ -3,18 +3,17 @@ import { FixedSizeList as List } from 'react-window';
 import { Proizvod } from '../types/model';
 import ProductComponent from './ProductComponent';
 
-const DISPLAY_COUNT = 30;
-
 const JEDINICA_MERE = "Jedinica Mere";
 const TIP_PROIZVODA = "Tip Proizvoda";
 const PRODUCT_COLUMNS = ["Naziv Proizvoda","Datum proizvodnje","Cena","Vrsta proizvoda",
                         "Stanje Zaliha",JEDINICA_MERE,TIP_PROIZVODA];
 
 type ProductsListProps = {
-    products: Array<Proizvod>
+    products: Array<Proizvod>,
+    display_count: number
 }
 
-export const ProductsList = ({ products }: ProductsListProps) => {
+export const ProductsList = ({ products, display_count }: ProductsListProps) => {
 
     return (
         <React.Fragment>
@@ -31,7 +30,7 @@ export const ProductsList = ({ products }: ProductsListProps) => {
             })}
         </div>
         <List
-            itemCount={DISPLAY_COUNT}
+            itemCount={display_count}
             height={400}
             width={"100%"}
             itemSize={60}

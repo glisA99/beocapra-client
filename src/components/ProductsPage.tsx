@@ -45,7 +45,7 @@ export const ProductsPage = () => {
         var count = document.getElementById("per_page_input").value;
         try {
             count = Number.parseInt(count);
-            if (count > 0 && count <= 50) {
+            if (count > 10 && count <= 50) {
                 setPerPage(count);
             }
         } catch (ex) {}
@@ -65,6 +65,7 @@ export const ProductsPage = () => {
                     <hr></hr>
                     <ProductsList 
                         products={state.content}
+                        display_count={perPage}
                     />
                     <PaginationFooter 
                         current={state.number + 1}
