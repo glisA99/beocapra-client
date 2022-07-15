@@ -4,21 +4,11 @@ import { fetchRadnik } from '../api/radnik-api';
 import { Radnik, User } from '../types/model';
 import { AppContext } from './withAppContext';
 
-export const RadnikPaper = () => {
+type RadnikPaperProps = {
+    radnik?: Radnik
+}
 
-    const [radnik,setRadnik] = React.useState<Radnik | undefined>(undefined);
-    
-    const appContext = React.useContext(AppContext);
-
-    React.useEffect(() => {
-        fetch();
-    },[])
-
-    async function fetch() {
-        const _radnik = await fetchRadnik((appContext.user as User).username);
-        if (!_radnik) return;
-        setRadnik(_radnik);
-    }
+export const RadnikPaper = ({ radnik }: RadnikPaperProps) => {
 
     if (!radnik) return <p>Loading...</p>
 

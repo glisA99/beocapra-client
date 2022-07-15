@@ -61,6 +61,10 @@ export type StavkaPrijemnicaDobavljaca = {
 
 export type PrijemnicaDobavljaca = {
     prijemnicaDobavljacaId: number,
-    datumPrijema: string,
     napomena: string,
+    datumPrijema: Date,
+    tovarniList?: any,
+    radnik: Radnik,
+    dobavljac: Dobavljac,
+    stavke: Array<StavkaPrijemnicaDobavljaca>
 }
