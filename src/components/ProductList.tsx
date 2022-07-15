@@ -18,13 +18,13 @@ export const ProductsList = ({ products }: ProductsListProps) => {
 
     return (
         <React.Fragment>
-        <div className='product-container'>
+        <div className='product-container-h'>
             <div className='product-id-div'>
                 ID
             </div>
             {PRODUCT_COLUMNS.map(column => {
                 return (
-                    <div className='product-column'>
+                    <div className='product-column-h'>
                         {column}
                     </div>
                 )
@@ -34,11 +34,12 @@ export const ProductsList = ({ products }: ProductsListProps) => {
             itemCount={DISPLAY_COUNT}
             height={400}
             width={"100%"}
-            itemSize={80}
+            itemSize={60}
             itemData={products}
             className="virtualized-list"
             layout="vertical"
             overscanCount={4}
+            style={{border: "2px solid grey"}}
         >
             {({ index, data, style }: any) => {
                 return (
@@ -46,6 +47,7 @@ export const ProductsList = ({ products }: ProductsListProps) => {
                         product={data[index]}
                         key={index}
                         style={style}
+                        index={index}
                     />
                 );
             }}

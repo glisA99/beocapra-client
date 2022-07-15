@@ -16,12 +16,11 @@ export type PageProps = {
 
 export async function fetchProducts({
     page = 1,
-    per_page = DEFAULT_PAGE_SIZE,
+    per_page,
     sortBy
 }: PageProps):Promise<Page<Proizvod> | false> {
     try {
         var access_token = getAccessToken();
-        console.log(access_token);
         page--;
         var response:AxiosResponse<Page<Proizvod>>;
         const requestConfig = {
@@ -31,7 +30,6 @@ export async function fetchProducts({
         }
         if (!sortBy) response = await axios_instance.get(`api/proizvod/pagination/${page}/${per_page}`,requestConfig);
         else response = await axios_instance.get(`api/proizvod/pagination_and_sort/${page}/${per_page}/${sortBy}`,requestConfig);
-        console.log(response);
 
         if (response.status == 200) return response.data;
         else return false;

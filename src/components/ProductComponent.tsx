@@ -8,13 +8,17 @@ const PRODUCT_COLUMNS = ["nazivProizvoda","datumProizvodnje","cena","vrstaProizv
 
 type ProductProps = {
     product: Proizvod,
-    style: any
+    style: any,
+    index: number
 }
 
-export const ProductComponent = ({ product, style }: ProductProps) => {
+export const ProductComponent = ({ product, style, index }: ProductProps) => {
 
     return (
-        <div className='product-container' style={style}>
+        <div 
+            className={`product-container ${index % 2 == 0 && "odd-column"}`} 
+            style={style}
+        >
             <div className='product-id-div'>
                 {product.proizvodId}
             </div>
@@ -23,7 +27,7 @@ export const ProductComponent = ({ product, style }: ProductProps) => {
                 if (![JEDINICA_MERE,TIP_PROIZVODA].includes(property)) value = product[property as keyof Proizvod];
                 else {
                     //@ts-ignore
-                    if (property === JEDINICA_MERE) value = product[property]["nazivJediniceMere"];
+                    if (property === JEDINICA_MERE) value = product[property]["jedinicaMereId"];
                     //@ts-ignore
                     else value = product[property]["nazivTipaProizvoda"];
                 }

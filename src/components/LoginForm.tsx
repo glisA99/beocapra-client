@@ -10,7 +10,7 @@ export const LoginForm = () => {
 
     const [username,setUsername] = useState<string>("");
     const [password,setPassword] = useState<string>("");
-    const [checked,setChecked] = useState<boolean>(true);
+    const [checked,setChecked] = useState<boolean>(false);
     const [error,setError] = useState<string | undefined>(undefined);
 
     const navigate = useNavigate();
