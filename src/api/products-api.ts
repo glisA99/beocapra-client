@@ -16,7 +16,7 @@ export type PageProps = {
 
 export async function fetchProducts({
     page = 1,
-    per_page,
+    per_page = DEFAULT_PAGE_SIZE,
     sortBy
 }: PageProps):Promise<Page<Proizvod> | false> {
     try {

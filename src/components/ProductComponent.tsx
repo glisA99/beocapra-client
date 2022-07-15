@@ -9,18 +9,22 @@ const PRODUCT_COLUMNS = ["nazivProizvoda","datumProizvodnje","cena","vrstaProizv
 type ProductProps = {
     product: Proizvod,
     style: any,
-    index: number
+    index: number,
+    onSelect?: (proizvod: Proizvod) => void
 }
 
-export const ProductComponent = ({ product, style, index }: ProductProps) => {
+export const ProductComponent = ({ product, style, index, onSelect }: ProductProps) => {
 
     //@ts-ignore
     const proizvod_id = product.proizvodID ? product.proizvodID : product.proizvodId;
 
     return (
         <div 
-            className={`product-container ${index % 2 == 0 && "odd-column"}`} 
+            className={`product-container ${index % 2 == 0 && "odd-column"} selectable`} 
             style={style}
+            onClick={() => {
+                if (onSelect) onSelect(product);
+            }}
         >
             <div className='product-id-div'>
                 {proizvod_id} 

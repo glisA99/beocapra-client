@@ -14,10 +14,11 @@ type ProductsListProps = {
     total_pages: number,
     page: number,
     total_elements: number,
-    overwrite?: number
+    overwrite?: number,
+    onSelect?: (proizvod: Proizvod) => void
 }
 
-export const ProductsList = ({ products, per_page, overwrite, page, total_elements }: ProductsListProps) => {
+export const ProductsList = ({ products, onSelect, per_page, overwrite, page, total_elements }: ProductsListProps) => {
 
     var display_count = 0;
     if (overwrite) display_count = overwrite;
@@ -55,6 +56,7 @@ export const ProductsList = ({ products, per_page, overwrite, page, total_elemen
                         key={index}
                         style={style}
                         index={index}
+                        onSelect={onSelect}
                     />
                 );
             }}
