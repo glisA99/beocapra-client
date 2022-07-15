@@ -7,17 +7,29 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import { AppContext } from './withAppContext';
 
 export const Navbar = () => {
 
-    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    const [anchorElProduct, setAnchorElProduct] = React.useState<null | HTMLElement>(null);
+    const [acnhorElReceipt, setAnchorElReceipt] = React.useState<null | HTMLElement>(null);
 
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget);
+    const appContext = React.useContext(AppContext);
+
+    const handleOpenProductMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElProduct(event.currentTarget);
     };
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
+    const handleOpenReceiptMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElReceipt(event.currentTarget);
+    };
+
+    const handleCloseReceiptMenu = () => {
+        setAnchorElReceipt(null);
+    };
+
+    const handleCloseProductMenu = () => {
+        setAnchorElProduct(null);
     };
 
     const navigate = useNavigate();
@@ -53,14 +65,14 @@ export const Navbar = () => {
                             key={"products"}
                             // onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: 'white', display: 'block' }}
-                            onClick={handleOpenUserMenu} 
+                            onClick={handleOpenProductMenu} 
                         >
                             Products
                         </Button>
                         <Menu
                             sx={{ mt: '45px' }}
                             id="menu-appbar"
-                            anchorEl={anchorElUser}
+                            anchorEl={anchorElProduct}
                             anchorOrigin={{
                                 vertical: 'top',
                                 horizontal: 'left',
@@ -70,11 +82,11 @@ export const Navbar = () => {
                                 vertical: 'top',
                                 horizontal: 'left',
                             }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
+                            open={Boolean(anchorElProduct)}
+                            onClose={handleCloseProductMenu}
                             >
                                 <MenuItem key={"View all products"} onClick={() => {
-                                    handleCloseUserMenu();
+                                    handleCloseProductMenu();
                                     navigate('/products');
                                 }}>
                                     <ViewListIcon/>
@@ -86,7 +98,7 @@ export const Navbar = () => {
                                     </Typography>
                                 </MenuItem>
                                 <MenuItem key={"Search products"} onClick={() => {
-                                    handleCloseUserMenu();
+                                    handleCloseProductMenu();
                                     navigate("/products/search");
                                 }}>
                                     <ManageSearchIcon />
@@ -97,7 +109,7 @@ export const Navbar = () => {
                                         Search products
                                     </Typography>
                                 </MenuItem>
-                                <MenuItem key={"Add new product"} onClick={handleCloseUserMenu}>
+                                <MenuItem key={"Add new product"} onClick={handleCloseProductMenu}>
                                     <AddBoxIcon />
                                     <Typography 
                                         textAlign="center"
@@ -107,13 +119,73 @@ export const Navbar = () => {
                                     </Typography>
                                 </MenuItem>
                         </Menu>
+
+                        <Button
+                            key={"receipt"}
+                            // onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                            onClick={handleOpenReceiptMenu} 
+                        >
+                            Receipt
+                        </Button>
+                        <Menu
+                            sx={{ mt: '45px' }}
+                            id="menu-appbar"
+                            anchorEl={acnhorElReceipt}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+                            open={Boolean(acnhorElReceipt)}
+                            onClose={handleCloseReceiptMenu}
+                            >
+                                <MenuItem key={"View all receipts"} onClick={() => {
+                                    handleCloseReceiptMenu();
+                                }}>
+                                    <ViewListIcon/>
+                                    <Typography 
+                                        textAlign="center"
+                                        sx={{marginLeft: "5px"}}
+                                    >
+                                        View all receipts
+                                    </Typography>
+                                </MenuItem>
+                                <MenuItem key={"Search receipts"} onClick={() => {
+                                    handleCloseReceiptMenu();
+                                }}>
+                                    <ManageSearchIcon />
+                                    <Typography 
+                                        textAlign="center"
+                                        sx={{marginLeft: "5px"}}
+                                    >
+                                        Search receipts
+                                    </Typography>
+                                </MenuItem>
+                                <MenuItem key={"Create new receipt"} onClick={() => {
+                                    handleCloseReceiptMenu();
+                                    navigate("/receipt/create");
+                                }}>
+                                    <AddBoxIcon />
+                                    <Typography 
+                                        textAlign="center"
+                                        sx={{marginLeft: "5px"}}
+                                    >
+                                        Create new receipt
+                                    </Typography>
+                                </MenuItem>
+                        </Menu>
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
                         <IconButton sx={{ p: 0 }}>
                             <AccountCircleIcon htmlColor='white'/>
                         </IconButton>
-                        <span style={{marginLeft: "5px"}}>Username</span>
+                        <span style={{marginLeft: "5px"}}>{appContext.user?.username}</span>
                     </Box>
                 </Toolbar>
             </Container>
