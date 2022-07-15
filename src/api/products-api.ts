@@ -39,7 +39,10 @@ export async function fetchProducts({
     }
 }
 
-export async function searchProducts(idPart: string,namePart: string):Promise<Array<Proizvod> | false> {
+export async function searchProducts(idPart: string,namePart: string):Promise<Array<Proizvod> | {
+    status: number,
+    error: any
+}> {
     try {
         var access_token = getAccessToken();
         const requestConfig = {
@@ -54,10 +57,16 @@ export async function searchProducts(idPart: string,namePart: string):Promise<Ar
         var response:AxiosResponse<Array<Proizvod>> = await axios_instance.get("api/proizvod/search",requestConfig)
 
         if (response.status == 200) return response.data;
-        else return false;
+        else return {
+            status: response.status,
+            error: {}
+        }
     } catch (ex) {
         console.log(ex);
-        return false;
+        return {
+            error: ex,
+            status: 404
+        }
     }
 }
 

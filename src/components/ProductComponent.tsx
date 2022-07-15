@@ -20,7 +20,7 @@ export const ProductComponent = ({ product, style, index }: ProductProps) => {
             style={style}
         >
             <div className='product-id-div'>
-                {product.proizvodId}
+                {product.proizvodID}
             </div>
             {PRODUCT_COLUMNS.map(property => {
                 let value;
@@ -32,7 +32,7 @@ export const ProductComponent = ({ product, style, index }: ProductProps) => {
                     else value = product[property]["nazivTipaProizvoda"];
                 }
                 return (
-                    <div className='product-column'>
+                    <div className='product-column' key={value + `${index}`}>
                         {value}
                     </div>
                 )

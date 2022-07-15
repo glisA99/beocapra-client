@@ -34,13 +34,15 @@ export const SearchProducts = () => {
             return;
         }
         var products = await searchProducts(idPart,namePart);
-        console.log("products:");
         console.log(products);
-        if (products === false) {
-            setError("Error occured during connection with server. Try again")
+        //@ts-ignore
+        if (products.error) {
+            //@ts-ignore
+            if (products.status == 404) setError("There are no products that satisfy criteria");
+            else setError("Error occured during connection with server. Try again")
             return;
         }   
-        setProducts(products);
+        setProducts(products as Array<Proizvod>);
     }
 
     return (

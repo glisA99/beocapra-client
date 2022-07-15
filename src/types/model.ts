@@ -23,7 +23,7 @@ export type TipProizvoda = {
 }
 
 export type Proizvod = {
-    proizvodId: number,
+    proizvodID: number,
     nazivProizvoda: string,
     datumProizvodnje: string,
     cena: number,
