@@ -78,7 +78,10 @@ export const ProductsPage = () => {
                     <hr></hr>
                     <ProductsList 
                         products={state.content}
-                        display_count={perPage}
+                        page={state.number + 1}
+                        per_page={perPage}
+                        total_pages={state.totalPages}
+                        total_elements={state.totalElements}
                     />
                     <PaginationFooter 
                         current={state.number + 1}

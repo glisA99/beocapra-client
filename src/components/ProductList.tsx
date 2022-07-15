@@ -10,10 +10,15 @@ const PRODUCT_COLUMNS = ["Naziv Proizvoda","Datum proizvodnje","Cena","Vrsta pro
 
 type ProductsListProps = {
     products: Array<Proizvod>,
-    display_count: number
+    per_page: number,
+    total_pages: number,
+    page: number,
+    total_elements: number
 }
 
-export const ProductsList = ({ products, display_count }: ProductsListProps) => {
+export const ProductsList = ({ products, per_page, total_pages, page, total_elements }: ProductsListProps) => {
+
+    const display_count = ((page * per_page) < total_elements) ? per_page : (page * per_page - total_elements)
 
     return (
         <React.Fragment>
