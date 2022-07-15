@@ -91,7 +91,10 @@ export const ProductsPage = () => {
                         last={state.totalPages}
                     />
                 </div>
-                <div className='products-settings'>
+                <div 
+                    className='products-settings'
+                    style={{borderLeft: "1px solid grey"}}
+                >
                     <h5>Choose desired page settings</h5>
                     <p>Choose number of products per page: </p>
                     <TextField 

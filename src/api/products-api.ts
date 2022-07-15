@@ -39,6 +39,28 @@ export async function fetchProducts({
     }
 }
 
+export async function searchProducts(idPart: string,namePart: string):Promise<Array<Proizvod> | false> {
+    try {
+        var access_token = getAccessToken();
+        const requestConfig = {
+            headers: {
+                "Authorization": `Bearer ${access_token}`
+            },
+            params: {
+                name: namePart,
+                id: idPart
+            }
+        }
+        var response:AxiosResponse<Array<Proizvod>> = await axios_instance.get("api/proizvod/search",requestConfig)
+
+        if (response.status == 200) return response.data;
+        else return false;
+    } catch (ex) {
+        console.log(ex);
+        return false;
+    }
+}
+
 function getAccessToken() {
     var user_data: any = localStorage.getItem(USER_DATA);
     if (!user_data) user_data = sessionStorage.getItem(USER_DATA);

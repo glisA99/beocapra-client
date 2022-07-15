@@ -85,7 +85,10 @@ export const Navbar = () => {
                                         View all products
                                     </Typography>
                                 </MenuItem>
-                                <MenuItem key={"Search products"} onClick={handleCloseUserMenu}>
+                                <MenuItem key={"Search products"} onClick={() => {
+                                    handleCloseUserMenu();
+                                    navigate("/products/search");
+                                }}>
                                     <ManageSearchIcon />
                                     <Typography 
                                         textAlign="center"

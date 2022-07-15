@@ -6,6 +6,7 @@ import { AuthorizedRouteProxy } from './components/AuthorizedRouteProxy';
 import { LoginRouteProxy } from './components/LoginRouteProxy';
 import { Navbar } from './components/Navbar';
 import { ProductsPage } from './components/ProductsPage';
+import { SearchProducts } from './components/SearchProducts';
 
 function App() {
 
@@ -30,6 +31,12 @@ function App() {
             <Navbar />
             <ProductsPage />
           </React.Fragment> 
+        }/>
+        <Route path="/products/search" element={
+          <AuthorizedRouteProxy path='/login'>
+            <Navbar />
+            <SearchProducts />
+          </AuthorizedRouteProxy>
         }/>
       </Routes>
     </div>
