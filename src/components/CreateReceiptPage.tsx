@@ -1,12 +1,14 @@
-import { Paper, TextareaAutosize } from '@mui/material';
+import { Button, Paper, TextareaAutosize } from '@mui/material';
 import React, { useState } from 'react';
-import { Dobavljac } from '../types/model';
+import { Dobavljac, StavkaPrijemnicaDobavljaca } from '../types/model';
 import DobavljacPaper from './DobavljacPaper';
 import { RadnikPaper } from './RadnikPaper';
+import { ReceiptItemList } from './ReceiptItemList';
 
 export const CreateReceiptPage = () => {
 
     const [dobavljac,setDobavljac] = useState<undefined | Dobavljac>(undefined);
+    const [stavke,setStavke] = useState<Array<StavkaPrijemnicaDobavljaca>>([]);
 
     const selectDobavljac = (dobavljac: Dobavljac) => {
         setDobavljac(dobavljac);
@@ -49,7 +51,18 @@ export const CreateReceiptPage = () => {
                     />
                 </div>
                 <div className='receipt-item-table-container'>
-                        <p>Receipt items:</p>
+                    <p>Stavke prijemnice dobavljaca: </p>
+                    <ReceiptItemList 
+                        stavke={stavke}
+                    />
+                    <br></br>
+                    <Button
+                        type='button'
+                        variant="contained"
+                        className='paper-button'
+                    >
+                        Dodaj stavku
+                    </Button>
                 </div>
             </div>
         </div>
