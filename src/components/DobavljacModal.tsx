@@ -9,7 +9,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 600,
+    width: "80%",
     bgcolor: 'background.paper',
     border: '1px solid grey',
     boxShadow: 24,
@@ -18,10 +18,11 @@ const style = {
 
 type DobavljacModalProps = {
     open: boolean,
-    handleClose: () => void
+    handleClose: () => void,
+    selectDobavljac: (dobavljac: Dobavljac) => void
 }
 
-export const DobavljacModal = ({ open, handleClose }: DobavljacModalProps) => {
+export const DobavljacModal = ({ open, handleClose, selectDobavljac }: DobavljacModalProps) => {
 
     const [dobavljaci,setDobavljaci] = React.useState<Array<Dobavljac> | null>(null)
 
@@ -42,11 +43,13 @@ export const DobavljacModal = ({ open, handleClose }: DobavljacModalProps) => {
             aria-labelledby="modal-modal-dobavljac"
             aria-describedby="modal-modal-choose-dobavljac"
         >
-            <Box sx={style}>
-                <p>Izaberite dobavljaca:</p>
+            <Box sx={style} style={{textAlign: "center"}}>
+                <h2>Izaberite dobavljaca:</h2>
+                <p>Koristite dupli klik da izaberete dobavljaca</p>
                 {dobavljaci ? <>
                     <DobavljacList 
                         dobavljaci={dobavljaci}
+                        selectDobavljac={selectDobavljac}
                     />
                 </> : <p>Loading...</p>}
             </Box>

@@ -14,13 +14,16 @@ type ProductProps = {
 
 export const ProductComponent = ({ product, style, index }: ProductProps) => {
 
+    //@ts-ignore
+    const proizvod_id = product.proizvodID ? product.proizvodID : product.proizvodId;
+
     return (
         <div 
             className={`product-container ${index % 2 == 0 && "odd-column"}`} 
             style={style}
         >
             <div className='product-id-div'>
-                {product.proizvodID}
+                {proizvod_id} 
             </div>
             {PRODUCT_COLUMNS.map(property => {
                 let value;

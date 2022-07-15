@@ -1,4 +1,4 @@
-import { Paper } from '@mui/material';
+import { Paper, TextareaAutosize } from '@mui/material';
 import React, { useState } from 'react';
 import { Dobavljac } from '../types/model';
 import DobavljacPaper from './DobavljacPaper';
@@ -7,6 +7,10 @@ import { RadnikPaper } from './RadnikPaper';
 export const CreateReceiptPage = () => {
 
     const [dobavljac,setDobavljac] = useState<undefined | Dobavljac>(undefined);
+
+    const selectDobavljac = (dobavljac: Dobavljac) => {
+        setDobavljac(dobavljac);
+    }
 
     return (
         <div className='products-page'>
@@ -19,28 +23,30 @@ export const CreateReceiptPage = () => {
                     <Paper
                         style={{
                             width: "100%", 
-                            height: "25%", 
+                            height: "auto", 
                             padding: "2%",
                             backgroundColor: "rgba(128, 128, 128, 0.18)"
                         }}
                     >
                         <p>Radnik:</p>
                         <RadnikPaper />
-                    </Paper>
+                    </Paper><br></br>
                     <Paper
-                        style={{width: "100%", height: "25%", padding: "2%", marginTop: "5px"}}
+                        style={{width: "100%", height: "auto", padding: "2%", marginTop: "5px"}}
                     >
                         <p>Dobavljac:</p>
                         <DobavljacPaper 
                             dobavljac={dobavljac}
+                            selectDobavljac={selectDobavljac}
                         />
-                    </Paper>
-                    <Paper
-                        style={{width: "100%", height: "25%", padding: "2%", marginTop: "5px"}}
-                    >
-                        <p>Tovarni list:</p>
-                        
-                    </Paper>
+                    </Paper><br></br><br></br>
+                    <span>Napomena:</span>
+                    <TextareaAutosize
+                        aria-label="minimum height"
+                        minRows={5}
+                        placeholder="Napomena..."
+                        style={{ width: "100%" }}
+                    />
                 </div>
                 <div className='receipt-item-table-container'>
                         <p>Receipt items:</p>

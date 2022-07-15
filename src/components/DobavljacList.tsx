@@ -1,15 +1,17 @@
 import React from 'react';
 import { FixedSizeList as List } from 'react-window';
 import { Dobavljac } from '../types/model';
+import { DobavljacComponent } from './DobavljacComponent';
 
-const DOBAVLJAC_COLUMNS = ["Naziv dobavljaca","Maticni broj","Maticni broj","PIB",
+const DOBAVLJAC_COLUMNS = ["Naziv dobavljaca","Maticni broj","Email","PIB",
                         "Ziro racun","Website"];
 
 type DobavljacListProps = {
-    dobavljaci: Array<Dobavljac>
+    dobavljaci: Array<Dobavljac>,
+    selectDobavljac: (dobavljac: Dobavljac) => void
 }
 
-export const DobavljacList = ({ dobavljaci }: DobavljacListProps) => {
+export const DobavljacList = ({ dobavljaci, selectDobavljac }: DobavljacListProps) => {
 
     return (
         <React.Fragment>
@@ -38,7 +40,12 @@ export const DobavljacList = ({ dobavljaci }: DobavljacListProps) => {
         >
             {({ index, data, style }: any) => {
                 return (
-                    <></>
+                    <DobavljacComponent
+                        dobavljac={data[index]}
+                        index={index}
+                        style={style}
+                        selectDobavljac={selectDobavljac}
+                    />
                 );
             }}
         </List>

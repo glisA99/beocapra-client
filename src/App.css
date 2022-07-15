@@ -120,7 +120,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 13%;
+  width: 14%;
   font-size: smaller;
 }
 
@@ -128,7 +128,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 13%;
+  width: 14%;
 }
 
 .odd-column {
@@ -184,8 +184,14 @@
 .receipt-text-field {
   width: 30%;
   margin-right: 3px !important;
+  font-size: smaller !important;
 }
 
 .paper-button {
   background-color: #61dafb !important;
+}
+
+.selectable:hover {
+  cursor: pointer;
+  background-color: rgba(180, 180, 180, 0.192);
 }
