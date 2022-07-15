@@ -1,7 +1,8 @@
 import { Button, Paper, TextareaAutosize } from '@mui/material';
 import React, { useState } from 'react';
 import { fetchRadnik } from '../api/radnik-api';
-import { Dobavljac, Radnik, StavkaPrijemnicaDobavljaca, User } from '../types/model';
+import { createReceiptAsync } from '../api/receipt-api';
+import { Dobavljac, PrijemnicaDobavljaca, Radnik, StavkaPrijemnicaDobavljaca, User } from '../types/model';
 import DobavljacPaper from './DobavljacPaper';
 import { RadnikPaper } from './RadnikPaper';
 import { ReceiptItemList } from './ReceiptItemList';
@@ -58,9 +59,21 @@ export const CreateReceiptPage = () => {
         setNapomena(event.target.value);
     }
 
-    async function createReceipt() {
-
+    const isDisabledCreation = () => {
+        if (!dobavljac || !radnik || stavke.length === 0) return true;
+        return false;
     }
+
+    async function createReceipt() {
+        var receipt:PrijemnicaDobavljaca = {} as PrijemnicaDobavljaca;
+        receipt.dobavljac = dobavljac as Dobavljac;
+        receipt.radnik = radnik as Radnik;
+        receipt.napomena = napomena;
+        receipt.datumPrijema = new Date();
+        receipt.stavke = stavke;
+        var result = await createReceiptAsync(receipt); 
+        console.log(result);
+    }   
 
     return (
         <div className='products-page'>
@@ -104,6 +117,8 @@ export const CreateReceiptPage = () => {
                         type='button'
                         variant="contained"
                         color='success'
+                        disabled={isDisabledCreation()}
+                        onClick={() => createReceipt()}
                     >
                         Kreiraj prijemnicu
                     </Button>

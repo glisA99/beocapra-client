@@ -5,7 +5,7 @@ import { getAccessToken } from './products-api';
 
 export const CREATED_STATUS_CODE = 201;
 
-export async function createReceipt(receipt: PrijemnicaDobavljaca) {
+export async function createReceiptAsync(receipt: PrijemnicaDobavljaca) {
     const URL = "api/prijemnica";
     var access_token = getAccessToken();
     const requestConfig = {
