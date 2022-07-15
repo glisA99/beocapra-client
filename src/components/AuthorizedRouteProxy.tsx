@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { WithChildren } from '../types/utils';
 import { AppContext, AppContextDispatch } from './withAppContext';
 import { USER_DATA } from './LoginForm';
-import { UserData } from '../api/login';
+import { parseJwt, UserData } from '../api/login';
 import { Backdrop, CircularProgress } from '@mui/material';
 
 // path: route where to navigate if this route is restricted
@@ -30,7 +30,8 @@ export const AuthorizedRouteProxy = ({ children, path }: AuthorizedRouteProps) =
                 return;
             }
             const data: UserData = JSON.parse(user_data);
-            appDispatch.loginUser({ username: data.username });
+            const jwt_parsed = parseJwt(data.tokens.access_token);
+            appDispatch.loginUser({ username: data.username, roles: jwt_parsed.roles });
         } 
     }, [])
 

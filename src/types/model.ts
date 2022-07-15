@@ -9,7 +9,8 @@ export type Radnik = {
 }
 
 export type User = {
-    username: string
+    username: string,
+    roles: Array<string>
 }
 
 export type JedinicaMere = {

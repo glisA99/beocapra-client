@@ -1,8 +1,9 @@
 import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import React, { useCallback, useState } from 'react';
-import { login, UserData } from '../api/login';
+import { login, parseJwt, UserData } from '../api/login';
 import { useNavigate } from 'react-router-dom';
+import { AppContextDispatch } from './withAppContext';
 
 export const USER_DATA = "USER_DATA";
 
@@ -12,6 +13,8 @@ export const LoginForm = () => {
     const [password,setPassword] = useState<string>("");
     const [checked,setChecked] = useState<boolean>(false);
     const [error,setError] = useState<string | undefined>(undefined);
+
+    const appContext = React.useContext(AppContextDispatch);
 
     const navigate = useNavigate();
 
@@ -36,7 +39,11 @@ export const LoginForm = () => {
                 setError("Invalid username or password");
                 return;
             }
+            const jwt_parsed = parseJwt(data.tokens.access_token);
             saveDataToStorage(checked,data);
+            console.log("login user:");
+            console.log({ username,roles: jwt_parsed.roles });
+            appContext.loginUser({ username,roles: jwt_parsed.roles })
             navigate("/");
         } catch (ex) {
             setError("Invalid username or password");
