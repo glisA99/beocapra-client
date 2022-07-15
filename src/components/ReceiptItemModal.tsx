@@ -4,6 +4,7 @@ import { fetchProducts } from '../api/products-api';
 import { Proizvod, StavkaPrijemnicaDobavljaca } from '../types/model';
 import { Page } from '../types/page';
 import { ExtendedStavka } from './CreateReceiptPage';
+import { PaginationFooter } from './PaginationFooter';
 import ProductsList from './ProductList';
 
 const style = {
@@ -34,8 +35,6 @@ export const ReceiptItemModal = ({ open, handleClose, dodajStavku }: ReceiptItem
     const [kolicina,setKolicina] = useState<string>("");
     const [error,setError] = useState<string>("");
 
-    const [openProizvod,setOpenProizvod] = useState<boolean>(false);
-
     React.useEffect(() => {
         fetch();
     },[page]);
@@ -52,6 +51,10 @@ export const ReceiptItemModal = ({ open, handleClose, dodajStavku }: ReceiptItem
         }
         setProducts(_page);
         setLoading(false);
+    }
+
+    const changePage = (pageNumber: number) => {
+        setPage(pageNumber);
     }
 
     const dodaj = () => {
@@ -113,6 +116,13 @@ export const ReceiptItemModal = ({ open, handleClose, dodajStavku }: ReceiptItem
                                     total_elements={(products as Page<Proizvod>).totalElements}
                                     total_pages={(products as Page<Proizvod>).totalPages}
                                     onSelect={selectProizvod}
+                                />
+                                <PaginationFooter 
+                                    current={page}
+                                    isFirst={(products as Page<Proizvod>).first}
+                                    isLast={(products as Page<Proizvod>).last}
+                                    last={(products as Page<Proizvod>).totalPages}
+                                    changePage={changePage}
                                 />
                             </>}
                         </div>

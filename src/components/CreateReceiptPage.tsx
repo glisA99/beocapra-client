@@ -99,7 +99,14 @@ export const CreateReceiptPage = () => {
                         placeholder="Napomena..."
                         style={{ width: "100%" }}
                         onChange={onNapomenaChange}
-                    />
+                    /><br></br>
+                    <Button
+                        type='button'
+                        variant="contained"
+                        color='success'
+                    >
+                        Kreiraj prijemnicu
+                    </Button>
                 </div>
                 <div className='receipt-item-table-container'>
                     <p>Stavke prijemnice dobavljaca: </p>
