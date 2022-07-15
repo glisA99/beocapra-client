@@ -16,22 +16,22 @@ export const LoginRouteProxy = ({ children }: LoginRouteProps) => {
 
     useEffect(() => {
         // if user is already loged-in
-        if (appContext.user) {
-            console.log("[LOGIN_PROXY]: User is already logged in");
-            console.log(`[LOGIN_PROXY]: Navigating to index route`);
-            setTimeout(() => navigate("/"), 2000);
-        } else {
-            var user_data = localStorage.getItem(USER_DATA);
-            if (!user_data) user_data = sessionStorage.getItem(USER_DATA);
-            // if user has active session or saved token in local storage
-            if (user_data) {
-                console.log("[LOGIN_PROXY]: User has saved access data in storage");
-                console.log(`[LOGIN_PROXY]: Navigating to index route`);
-                const data: UserData = JSON.parse(user_data);
-                appDispatch.loginUser({ username: data.username });
-                setTimeout(() => navigate("/"),2000);
-            }
-        }
+        // if (appContext.user) {
+        //     console.log("[LOGIN_PROXY]: User is already logged in");
+        //     console.log(`[LOGIN_PROXY]: Navigating to index route`);
+        //     setTimeout(() => navigate("/"), 2000);
+        // } else {
+        //     var user_data = localStorage.getItem(USER_DATA);
+        //     if (!user_data) user_data = sessionStorage.getItem(USER_DATA);
+        //     // if user has active session or saved token in local storage
+        //     if (user_data) {
+        //         console.log("[LOGIN_PROXY]: User has saved access data in storage");
+        //         console.log(`[LOGIN_PROXY]: Navigating to index route`);
+        //         const data: UserData = JSON.parse(user_data);
+        //         appDispatch.loginUser({ username: data.username });
+        //         setTimeout(() => navigate("/"),2000);
+        //     }
+        // }
     }, [])
 
     const backdrop = (
@@ -47,9 +47,10 @@ export const LoginRouteProxy = ({ children }: LoginRouteProps) => {
         </Backdrop>
     )
 
+    console.log(appContext.user);
     return (
         <React.Fragment>
-            {(appContext.user || localStorage.getItem(USER_DATA) || sessionStorage.getItem(USER_DATA)) ?
+            {appContext.user ?
                 <>{backdrop}</> : children
             }
         </React.Fragment>

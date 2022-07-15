@@ -35,7 +35,6 @@ export const WithAppContext = ({ children,initValue = { context: {} } }: WithApp
     },[])
 
     const logoutUser = useCallback<LogoutFn>(() => {
-        if (!state.context.user) return;
         setState(prevState => ({ context: { ...prevState.context, user: undefined } }));
     }, []);
 

@@ -7,7 +7,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import AddBoxIcon from '@mui/icons-material/AddBox';
-import { AppContext } from './withAppContext';
+import { AppContext, AppContextDispatch } from './withAppContext';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export const Navbar = () => {
 
@@ -15,6 +16,7 @@ export const Navbar = () => {
     const [acnhorElReceipt, setAnchorElReceipt] = React.useState<null | HTMLElement>(null);
 
     const appContext = React.useContext(AppContext);
+    const appDispatchContext = React.useContext(AppContextDispatch);
 
     const handleOpenProductMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElProduct(event.currentTarget);
@@ -186,6 +188,14 @@ export const Navbar = () => {
                             <AccountCircleIcon htmlColor='white'/>
                         </IconButton>
                         <span style={{marginLeft: "5px"}}>{appContext.user?.username}</span>
+                        <IconButton sx={{ p: 0 }} style={{marginLeft: "5px"}} onClick={() => {
+                            sessionStorage.clear();
+                            localStorage.clear();
+                            appDispatchContext.logoutUser();
+                            navigate("/login");
+                        }}>
+                            <LogoutIcon htmlColor='white'/>
+                        </IconButton>
                     </Box>
                 </Toolbar>
             </Container>
