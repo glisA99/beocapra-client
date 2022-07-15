@@ -7,6 +7,7 @@ import { LoginRouteProxy } from './components/LoginRouteProxy';
 import { Navbar } from './components/Navbar';
 import { ProductsPage } from './components/ProductsPage';
 import { SearchProducts } from './components/SearchProducts';
+import { CreateReceiptPage } from './components/CreateReceiptPage';
 
 function App() {
 
@@ -38,6 +39,12 @@ function App() {
             <SearchProducts />
           </AuthorizedRouteProxy>
         }/>
+        <Route path="/receipt/create" element={
+          <AuthorizedRouteProxy path="/login">
+            <Navbar />
+            <CreateReceiptPage />
+          </AuthorizedRouteProxy>
+        } />
       </Routes>
     </div>
   );

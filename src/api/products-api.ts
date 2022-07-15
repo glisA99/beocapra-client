@@ -70,7 +70,7 @@ export async function searchProducts(idPart: string,namePart: string):Promise<Ar
     }
 }
 
-function getAccessToken() {
+export function getAccessToken() {
     var user_data: any = localStorage.getItem(USER_DATA);
     if (!user_data) user_data = sessionStorage.getItem(USER_DATA);
     if (!user_data) throw new Error("User is not logged in - access token not available");
