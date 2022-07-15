@@ -13,12 +13,15 @@ type ProductsListProps = {
     per_page: number,
     total_pages: number,
     page: number,
-    total_elements: number
+    total_elements: number,
+    overwrite?: number
 }
 
-export const ProductsList = ({ products, per_page, total_pages, page, total_elements }: ProductsListProps) => {
+export const ProductsList = ({ products, per_page, overwrite, page, total_elements }: ProductsListProps) => {
 
-    const display_count = ((page * per_page) < total_elements) ? per_page : (page * per_page - total_elements)
+    var display_count = 0;
+    if (overwrite) display_count = overwrite;
+    else display_count = ((page * per_page) < total_elements) ? per_page : (page * per_page - total_elements)
 
     return (
         <React.Fragment>
